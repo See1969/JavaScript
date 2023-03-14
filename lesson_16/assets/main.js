@@ -107,22 +107,22 @@ console.log(getLocalDate(new Date(1999999123456), true, true) === '2033-05-18, 0
  * и выводит текущий день недели: "понедельник", "вторник", … "воскресенье".
  */
 
-let getWeekDay = function (dt) {
-  const date = new Date(dt);
+const getWeekDay = function (date) {
+  date = new Date(date).getDay();
 
-  const days = [
-    "воскресенье",
-    "понедельник",
-    "второник",
-    "среда",
-    "четверг",
-    "пятница",
-    "суббота"
-  ]
+  switch (date) {
+    case 0: date = 'воскресенье'; break;
+    case 1: date = 'понедельник'; break;
+    case 2: date = 'вторник'; break;
+    case 3: date = 'среда'; break;
+    case 4: date = 'четверг'; break;
+    case 5: date = 'пятница'; break;
+    case 6: date = 'суббота'; break;
+  }
 
-  return days[date.getDay()]
+  return date;
+}
 
-};
 
 console.log(getWeekDay('2019-01-30')); // среда
 console.log(getWeekDay('2019-07-16')); // вторник
@@ -194,10 +194,10 @@ console.log(getDateAgo('2019-01-29', 365)); // 29.01.2018
  */
 
 let Car = function (engine, model, name, year) {
-  this.engine = engine,
-    this.model = model,
-    this.name = name,
-    this.year = year
+  this.engine = engine;
+  this.model = model;
+  this.name = name;
+  this.year = year;
 };
 
 Object.defineProperties(Car.prototype, {
@@ -205,7 +205,7 @@ Object.defineProperties(Car.prototype, {
     get() {
       const yearNow = new Date().getFullYear();
 
-      return this.year !== yearNow ? 'used' : 'new';
+      return yearNow - this.year > 1 ? 'used' : 'new';
     },
     set(value) {
       const yearNow = new Date().getFullYear();
@@ -216,12 +216,11 @@ Object.defineProperties(Car.prototype, {
 });
 
 Car.prototype.info = function () {
-  return `${this.name} ${this.model}, ${this.engine}cc, ${this.year}, ${this.used}`;
+  return `${this.name} ${this.model}, ${this.engine}cc, year ${this.year}, ${this.used}`;
 };
 
 let car = new Car(2000, 'Lacetti', 'Chevrolet', 2010);
 let car2 = new Car(5000, 'FX50 AWD', 'Infinite', 2019);
-
 
 
 
