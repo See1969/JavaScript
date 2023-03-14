@@ -60,11 +60,7 @@ let getLocalDate = function (date, isSeconds = false, isISO = false) {
   const seconds = date.getSeconds().toString().padStart(2, '0');
 
   let formattedDate = '';
-  if (isISO) {
-    formattedDate += `${year}-${month}-${day}, `;
-  } else {
-    formattedDate += `${day}.${month}.${year}, `;
-  }
+  formattedDate += isISO ? `${year}-${month}-${day}, ` : `${day}.${month}.${year}, `;
 
   formattedDate += `${hour}:${minutes}`;
 

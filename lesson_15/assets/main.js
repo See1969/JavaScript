@@ -178,10 +178,6 @@ console.log(myPow(2, 3, myPrint)); // 2^3=8
  * - если сеттеру used присвоено значение 'used', ничего делать не нужно
  */
 
-let info = function () {
-  return `${this.name} ${this.model}, ${this.engine}cc, ${this.year}, ${this.used}`;
-};
-
 let yearNow = new Date().getFullYear();
 
 let car = {
@@ -189,13 +185,13 @@ let car = {
   model: 'Lacetti',
   name: 'Chevrolet',
   year: 2010,
-  info: info,
   get used() {
     return this.year !== yearNow ? 'used' : 'new';
   },
   set used(value) {
     if (value === 'new' && this.year < yearNow) this.year = yearNow;
-  }
+  },
+  info() { return `${this.name} ${this.model}, ${this.engine}cc, year ${this.year}, ${this.used}`; }
 };
 
 let car2 = {
@@ -203,13 +199,13 @@ let car2 = {
   model: 'FX50 AWD',
   name: 'Infinite',
   year: 2019,
-  info: info,
   get used() {
     return this.year !== yearNow ? 'used' : 'new';
   },
   set used(value) {
     if (value === 'new' && this.year < yearNow) this.year = yearNow;
-  }
+  },
+  info() { return `${this.name} ${this.model}, ${this.engine}cc, year ${this.year}, ${this.used}`; }
 };
 
 
